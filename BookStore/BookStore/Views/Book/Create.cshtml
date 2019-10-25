@@ -1,0 +1,173 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    if (Session["User_id"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Simple House Template</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet" />
+    <link href="~/Content/css/templatemo-style.css" rel="stylesheet" />
+
+</head>
+<!--
+
+Simple House
+
+https://templatemo.com/tm-539-simple-house
+
+-->
+<body>
+
+    <div class="container">
+        <!-- Top box -->
+        <!-- Logo & Site Name -->
+        <div class="placeholder">
+
+            <div class="parallax-window" data-parallax="scroll" data-image-src="Content/wallpaper1.jpg">
+                <div class="tm-header">
+                    <div class="row tm-header-inner">
+                        <div class="col-md-6 col-12">
+                            <img src="~/Content/images/simple-house-logo.png" alt="Logo" class="tm-site-logo" />
+                            <div class="tm-site-text-box">
+                                <h1 class="tm-site-title">Book Case</h1>
+                                <h6 class="tm-site-description">E-Book Online</h6>
+                            </div>
+                        </div>
+                        <nav class="col-md-6 col-12 tm-nav">
+                            <ul class="tm-nav-ul">
+                                <li class="tm-nav-li">@Html.ActionLink("Home", "Index", "Home", null, new { @class = "tm-nav-link" })</li>
+                                <li class="tm-nav-li">@Html.ActionLink("Write", "Index", "Book", new { @class = "tm-nav-link" })</li>
+                                <li class="tm-nav-li">@Html.ActionLink("Library", "Index", "Library", null, new { @class = "tm-nav-link" })</li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main>
+
+
+            <div class="tm-paging-links">
+                <nav>
+
+                    <div class="btn">
+                        @using (Html.BeginForm("Create", "Book", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            <div class="form-group row">
+
+                                <div class="col-sm-10">
+                                    <h2 class="tm-paging-link">Write Book</h2>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+
+                                <div class="col-sm-10">
+                                    <p>Author</p>
+                                    <input type="text" class="form-control" placeholder="Username" id="Name" name="Name" value="@Session["Username"]" readonly>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-sm-10">
+                                    <p>Title</p>
+                                    <input type="text" class="form-control" placeholder="Title" id="Title" name="Title" autocomplete="off">
+                                </div>
+                            </div>
+     
+                            <div class="form-group row">
+
+                                <div class="col-sm-10">
+                                    <p>Category</p>
+                                    <select class="form-control" id="Category" name="Category" style="width: 186.6px;">
+                                        <option value="Art">Art</option>
+                                        <option value="Business">Business</option>
+                                        <option value="Cooking">Cooking</option>
+                                        <option value="Kids">Kids</option>
+                                    </select>
+                                    
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+
+                                <div class="col-sm-10">
+                                    <p>Description</p>
+                                    <input type="text" class="form-control" placeholder="Description" id="Description" name="Description" autocomplete="off">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-sm-10">
+                                    <p>Price</p>
+                                    <input type="text" class="form-control" placeholder="Price" id="Price" name="Price" autocomplete="off">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+
+                                <div class="col-sm-10">
+                                    <p>Cover Image</p>
+                                    <input type="file" class="form-control" placeholder="Coverimg" id="Coverimg" name="Coverimg">
+
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+
+                                <div class="col-sm-10">
+                                    <p>E-Book</p>
+                                    <input type="file" class="form-control" placeholder="Content" id="Content" name="Content">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+
+                                <div class="col-sm-10">
+                                    <button class="btn">Upload</button>
+                                </div>
+                            </div>
+              
+                        }
+                    </div>
+
+                </nav>
+            </div>
+
+            <br /><br /><br />
+
+
+        </main>
+
+
+    </div>
+    <script src="~/Content/js/jquery.min.js"></script>
+    <script src="~/Content/js/parallax.min.js"></script>
+    <script>
+		$(document).ready(function(){
+			// Handle click on paging links
+			$('.tm-paging-link').click(function(e){
+				e.preventDefault();
+
+				var page = $(this).text().toLowerCase();
+				$('.tm-gallery-page').addClass('hidden');
+				$('#tm-gallery-page-' + page).removeClass('hidden');
+				$('.tm-paging-link').removeClass('active');
+				$(this).addClass("active");
+			});
+		});
+    </script>
+</body>
+</html>

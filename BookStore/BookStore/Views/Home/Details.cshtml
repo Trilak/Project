@@ -1,0 +1,38 @@
+﻿@model BookStore.Models.Books
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div class="dl-horizontal" align="center">
+
+    <hr />
+    <TABLE >
+        <TR>
+            <TD ROWSPAN="6"><img src=@Url.Content("~/UploadedImages/"+ @Html.DisplayFor(model => model.Coverimg)) width="250" height="300" /></TD>
+            <TD ROWSPAN="6">&nbsp;&nbsp;&nbsp;&nbsp;</TD><TD ROWSPAN="6">&nbsp;&nbsp;</TD>
+            <TD><h4>@Html.DisplayFor(model => model.Title)</h4></TD>         
+        </TR>
+        <TR>
+            <TD>@Html.DisplayNameFor(model => model.Author) : @Html.DisplayFor(model => model.Author)</TD>
+        </TR>
+        <TR>
+            <TD>@Html.DisplayFor(model => model.Category)</TD>
+        </TR>
+        <TR>
+            <TD>@Html.DisplayFor(model => model.Description)</TD>
+        </TR>
+        <TR>
+            <TD><p> @Html.DisplayFor(model => model.Price)  ฿</p></TD>
+        </TR>
+        <TR>
+            <TD>@Html.ActionLink("Buy", "Buy")</TD>
+        </TR>
+    </TABLE>
+<br /><br /><br />
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

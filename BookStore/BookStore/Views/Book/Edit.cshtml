@@ -1,0 +1,190 @@
+﻿@model BookStore.Models.Books
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    if (Session["User_id"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Simple House Template</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet" />
+    <link href="~/Content/css/templatemo-style.css" rel="stylesheet" />
+
+</head>
+<!--
+
+Simple House
+
+https://templatemo.com/tm-539-simple-house
+
+-->
+<body>
+
+    <div class="container">
+        <!-- Top box -->
+        <!-- Logo & Site Name -->
+        <div class="placeholder">
+
+            <div class="parallax-window" data-parallax="scroll" data-image-src="Content/wallpaper1.jpg">
+                <div class="tm-header">
+                    <div class="row tm-header-inner">
+                        <div class="col-md-6 col-12">
+                            <img src="~/Content/images/simple-house-logo.png" alt="Logo" class="tm-site-logo" />
+                            <div class="tm-site-text-box">
+                                <h1 class="tm-site-title">Book Case</h1>
+                                <h6 class="tm-site-description">E-Book Online</h6>
+                            </div>
+                        </div>
+                        <nav class="col-md-6 col-12 tm-nav">
+                            <ul class="tm-nav-ul">
+                                <li class="tm-nav-li">@Html.ActionLink("Home", "Index", "Home", null, new { @class = "tm-nav-link" })</li>
+                                <li class="tm-nav-li">@Html.ActionLink("Write", "Index", "Book", new { @class = "tm-nav-link" })</li>
+                                <li class="tm-nav-li">@Html.ActionLink("Library", "Index", "Library", null, new { @class = "tm-nav-link" })</li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main>
+           
+            <div class="tm-paging-links">
+                <nav>
+
+                    <div class="btn">
+                       @using (Html.BeginForm())
+                       {
+                        @Html.AntiForgeryToken()
+                            <div class="form-group row">
+
+                                <div class="col-sm-10">
+                                    <h2 class="tm-paging-link">Write Book</h2>
+                                </div>
+                            </div>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.Book_id)
+
+                            <div class="form-group row">
+                                <p>Author</p>
+                                <div class="col-sm-10">
+                                    @Html.EditorFor(model => model.Author, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Author, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-sm-10">
+                                   <p>Title</p>
+                                   @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                                   @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+
+                                <div class="col-sm-10">
+                                    <p>Category</p>
+                                    @Html.EditorFor(model => model.Category, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+
+                                <div class="col-sm-10">
+                                    <p>Description</p>
+                                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+
+                                <div class="col-sm-10">
+                                    <p>Price</p>
+                                    @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+
+                                <div class="col-sm-10">
+                                    <p>Cover Image</p>
+                                    @Html.EditorFor(model => model.Coverimg, new { htmlAttributes = new { @class = "form-control", type = "file" } })
+                                    @Html.ValidationMessageFor(model => model.Coverimg, "", new { @class = "text-danger" })
+
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+
+                                <div class="col-sm-10">
+                                    <p>E-Book</p>
+                                    @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @class = "form-control", type = "file" } })
+                                    @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+
+                                <div class="col-sm-10">
+                                    <input type="submit" value="Save" class="btn" />
+                                </div>
+                            </div>
+
+                        }
+                    </div>
+                    <div>
+                        @Html.ActionLink("Back to List", "Index")
+                    </div>
+                </nav>
+            </div>
+
+            <br /><br /><br />
+
+
+        </main>
+
+
+    </div>
+    <script src="~/Content/js/jquery.min.js"></script>
+    <script src="~/Content/js/parallax.min.js"></script>
+    <script>
+		$(document).ready(function(){
+			// Handle click on paging links
+			$('.tm-paging-link').click(function(e){
+				e.preventDefault();
+
+				var page = $(this).text().toLowerCase();
+				$('.tm-gallery-page').addClass('hidden');
+				$('#tm-gallery-page-' + page).removeClass('hidden');
+				$('.tm-paging-link').removeClass('active');
+				$(this).addClass("active");
+			});
+		});
+    </script>
+</body>
+</html>
+
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

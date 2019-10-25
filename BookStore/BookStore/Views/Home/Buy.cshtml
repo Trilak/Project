@@ -1,0 +1,132 @@
+﻿@model BookStore.Models.Books
+
+@{
+    ViewBag.Title = "Buy";
+    if (Session["User_id"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}
+
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Simple House Template</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet" />
+    <link href="~/Content/css/templatemo-style.css" rel="stylesheet" />
+
+</head>
+<!--
+
+Simple House
+
+https://templatemo.com/tm-539-simple-house
+
+-->
+<body>
+
+    <div class="container">
+        <!-- Top box -->
+        <!-- Logo & Site Name -->
+        <div class="placeholder">
+
+            <div class="parallax-window" data-parallax="scroll" data-image-src="/Content/wallpaper1.jpg">
+                <div class="tm-header">
+                    <div class="row tm-header-inner">
+                        <div class="col-md-6 col-12">
+                            <img src="~/Content/images/simple-house-logo.png" alt="Logo" class="tm-site-logo" />
+                            <div class="tm-site-text-box">
+                                <h1 class="tm-site-title">Book Case</h1>
+                                <h6 class="tm-site-description">E-Book Online</h6>
+                            </div>
+                        </div>
+                        <nav class="col-md-6 col-12 tm-nav">
+                            <ul class="tm-nav-ul">
+                                <li class="tm-nav-li">@Html.ActionLink("Home", "Index", "Home",  new { @class = "tm-nav-link" })</li>
+                                <li class="tm-nav-li">@Html.ActionLink("Write", "Index", "Book", null, new { @class = "tm-nav-link" })</li>
+                                <li class="tm-nav-li">@Html.ActionLink("Library", "Index", "Library", null, new { @class = "tm-nav-link" })</li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main>
+
+
+            <div class="tm-paging-links">
+                <nav>
+                    <div class="btn">
+                        @using (Html.BeginForm("Buy", "Home", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="form-horizontal">
+                                <h4>Books</h4>
+                                <hr />
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(model => model.Book_id, new { @id = "Book_id", @name = "Book_id" })
+
+                                @Html.HiddenFor(model => model.Content, new { htmlAttributes = new { @class = "form-control"} })
+                        <TABLE>
+                            <TR>
+                                <TD ROWSPAN="6"><img src=@Url.Content("~/UploadedImages/" + @Html.DisplayFor(model => model.Coverimg)) width="250" height="300" /></TD>
+                                <TD ROWSPAN="6">&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+                                <TD ROWSPAN="6">&nbsp;&nbsp;</TD>
+                                <TD><p>Title</p><h4>@Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", @id = "Title", @name = "Title" } })</h4></TD>
+                            </TR>
+                            <TR>
+                                <TD><p>Author</p>@Html.EditorFor(model => model.Author, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })</TD>
+                            </TR>
+                            <TR>
+                                <TD><p>Category</p>@Html.EditorFor(model => model.Category, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })</TD>
+                            </TR>
+                            <TR>
+                                <TD><p>Description</p>@Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })</TD>
+                            </TR>
+                            <TR> 
+                                <TD><p>Price</p><p> @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", @id = "Price", @name = "Price" } }) </p></TD>
+                            </TR>
+                            <TR>
+                                <TD><input type="text" class="form-control" placeholder="Credit card number" id="Card_no" name="Card_no" autocomplete="off"></TD>
+
+                            </TR>
+                        </TABLE><br />
+                                <button class="btn">Confirm</button>
+                    </div>
+                        }
+                  </div>
+                </nav>
+            </div>
+
+            <br /><br /><br />
+        </main>
+    </div>
+    <script src="~/Content/js/jquery.min.js"></script>
+    <script src="~/Content/js/parallax.min.js"></script>
+    <script>
+		$(document).ready(function(){
+			// Handle click on paging links
+			$('.tm-paging-link').click(function(e){
+				e.preventDefault();
+
+				var page = $(this).text().toLowerCase();
+				$('.tm-gallery-page').addClass('hidden');
+				$('#tm-gallery-page-' + page).removeClass('hidden');
+				$('.tm-paging-link').removeClass('active');
+				$(this).addClass("active");
+			});
+		});
+    </script>
+</body>
+</html>
