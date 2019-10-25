@@ -2,73 +2,134 @@
 
 @{
     ViewBag.Title = "Details";
+    if (Session["User_id"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
 }
 
-<h2>Details</h2>
+<!DOCTYPE html>
+<html>
 
-<div>
-    <h4>Books</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Author)
-        </dt>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-        <dd>
-            @Html.DisplayFor(model => model.Author)
-        </dd>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet" />
+    <link href="~/Content/css/templatemo-style.css" rel="stylesheet" />
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
+</head>
+<!--
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
+Simple House
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Category)
-        </dt>
+https://templatemo.com/tm-539-simple-house
 
-        <dd>
-            @Html.DisplayFor(model => model.Category)
-        </dd>
+-->
+<body>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+    <div class="container">
+        <!-- Top box -->
+        <!-- Logo & Site Name -->
+        <div class="placeholder">
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+            <div class="parallax-window" data-parallax="scroll" data-image-src="/Content/wallpaper1.jpg">
+                <div class="tm-header">
+                    <div class="row tm-header-inner">
+                        <div class="col-md-6 col-12">
+                            <img src="~/Content/images/simple-house-logo.png" alt="Logo" class="tm-site-logo" />
+                            <div class="tm-site-text-box">
+                                <h1 class="tm-site-title">Book Case</h1>
+                                <h6 class="tm-site-description">E-Book Online</h6>
+                            </div>
+                        </div>
+                        <nav class="col-md-6 col-12 tm-nav">
+                            <ul class="tm-nav-ul">
+                                <li class="tm-nav-li">@Html.ActionLink("Home", "Index", "Home", null, new { @class = "tm-nav-link" })</li>
+                                <li class="tm-nav-li">@Html.ActionLink("Write", "Index", "Book", new { @class = "tm-nav-link" })</li>
+                                <li class="tm-nav-li">@Html.ActionLink("Library", "ViewBook", "Library", null, new { @class = "tm-nav-link" })</li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
+        <main>
 
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
+            <div class="tm-paging-links">
+                <nav>
+                    <div class="form-group row">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Coverimg)
-        </dt>
+                        <div class="col-sm-10">
+                            <h2 class="tm-paging-link">DETAILS</h2>
+                        </div>
+                    </div>
+                    <div class="btn">
+                        
+                        <div class="dl-horizontal" align="center">
+                            <br /><br />
+                            <TABLE>
+                                
+                                <TR>
+                                    <TD ROWSPAN="6"><img src=@Url.Content("~/UploadedImages/"+ @Html.DisplayFor(model => model.Coverimg)) width="250" height="300" /></TD>
+                                    <TD ROWSPAN="6">&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+                                    <TD ROWSPAN="6">&nbsp;&nbsp;</TD>
+                                    <TD><h4>@Html.DisplayFor(model => model.Title)</h4></TD>
+                                </TR>
+                                <TR>
+                                    <TD>@Html.DisplayNameFor(model => model.Author) : @Html.DisplayFor(model => model.Author)</TD>
+                                </TR>
+                                <TR>
+                                    <TD>@Html.DisplayNameFor(model => model.Category) : @Html.DisplayFor(model => model.Category)</TD>
+                                </TR>
+                                <TR>
+                                    <TD>@Html.DisplayNameFor(model => model.Description) : @Html.DisplayFor(model => model.Description)</TD>
+                                </TR>
+                                <TR>
+                                    <TD><p> @Html.DisplayFor(model => model.Price)  ฿</p></TD>
+                                </TR>
+                                <TR>
+                                    
+                                    <TD ></TD>
+                                </TR>
+                            </TABLE>
+                            </div>
+                        </div>
+                    <div>
+                        @Html.ActionLink("Back", "Index")
+                    </div>
+                </nav>
+            </div>
 
-        <dd>
-            <img src=@Url.Content("~/UploadedImages/"+ @Html.DisplayFor(model => model.Coverimg)) width="250" height="250" />
-        </dd>
+            <br /><br /><br />
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Content)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Content)
-        </dd>
+        </main>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Book_id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+    </div>
+    <script src="~/Content/js/jquery.min.js"></script>
+    <script src="~/Content/js/parallax.min.js"></script>
+    <script>
+		$(document).ready(function(){
+			// Handle click on paging links
+			$('.tm-paging-link').click(function(e){
+				e.preventDefault();
+
+				var page = $(this).text().toLowerCase();
+				$('.tm-gallery-page').addClass('hidden');
+				$('#tm-gallery-page-' + page).removeClass('hidden');
+				$('.tm-paging-link').removeClass('active');
+				$(this).addClass("active");
+			});
+		});
+    </script>
+</body>
+</html>
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

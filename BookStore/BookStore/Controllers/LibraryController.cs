@@ -20,15 +20,22 @@ namespace BookStore.Controllers
 
         public ViewResult ViewBook()
         {
-            IEnumerable<BooksViewModel> model = null;
 
-            model = (from user in db.tblUser
-                     join b in db.Books on user.Username equals b.Author
-                     where user.Username.Equals(Session["Username"])
+            IEnumerable<LibraryViewModel> model = null;
 
-                     select new BooksViewModel
+
+            string name = Convert.ToString(Session["Username"]);
+
+            model = (from order in db.tblOrder
+                     join b in db.Books on order.Book_id equals b.Book_id
+                     join user in db.tblUser on order.User_id equals user.User_id
+
+                     where user.Username.Equals(name)
+
+                     select new LibraryViewModel
                      {
-                         Author = user.Username,
+                         Id = b.Book_id,
+                         Author = b.Author,
                          Title = b.Title,
                          Category = b.Category,
                          Description = b.Description,
@@ -38,6 +45,14 @@ namespace BookStore.Controllers
                      });
 
             return View(model);
+
+        }
+
+        public ActionResult Details(int id)
+        {
+            var databyid = db.Books.Single(x => x.Book_id == id);
+
+            return View(databyid);
         }
 
     }

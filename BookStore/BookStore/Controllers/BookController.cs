@@ -16,9 +16,28 @@ namespace BookStore.Controllers
 
         public ActionResult Index()
         {
+            IEnumerable<BooksViewModel> model = null;
 
+            string name = Convert.ToString(Session["Username"]);
 
-            return View(db.Books.ToList());
+            model = (from user in db.tblUser
+                     join b in db.Books on user.Username equals b.Author
+                     where user.Username.Equals(name)
+
+                     select new BooksViewModel
+                     {
+                         Id = b.Book_id,
+                         Author = user.Username,
+                         Title = b.Title,
+                         Category = b.Category,
+                         Description = b.Description,
+                         Price = b.Price,
+                         Coverimg = b.Coverimg,
+                         Content = b.Content
+                     });
+
+            return View(model);
+
         }
 
 
@@ -146,12 +165,12 @@ namespace BookStore.Controllers
 
         // POST: Book/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, Books collection)
         {
             try
             {
-                var bookdatabyid = db.Books.Single(x => x.Book_id == id);
-                db.Books.Remove(bookdatabyid);
+                var bookdataid = db.Books.Single(x => x.Book_id == id);
+                db.Books.Remove(bookdataid);
                 db.SaveChanges();
 
                 return RedirectToAction("Index");

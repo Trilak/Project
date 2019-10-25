@@ -139,6 +139,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\123.jpg" />
     <Content Include="Content\bootstrap-datetimepicker.css" />
     <Content Include="Content\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -167,16 +168,6 @@
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="images\about-01.jpg" />
-    <Content Include="images\about-02.jpg" />
-    <Content Include="images\about-03.jpg" />
-    <Content Include="images\about-04.jpg" />
-    <Content Include="images\about-05.jpg" />
-    <Content Include="images\about-06.jpg" />
-    <Content Include="images\dummy-img.png" />
-    <Content Include="images\img-01.jpg" />
-    <Content Include="images\simple-house-01.jpg" />
-    <Content Include="images\simple-house-logo.png" />
     <Content Include="Models\Books.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>BookStoreContext.edmx</DependentUpon>
@@ -326,6 +317,7 @@
       <DependentUpon>BookStoreContext.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\BooksViewModel.cs" />
+    <Compile Include="Models\LibraryViewModel.cs" />
     <Compile Include="Models\tblOrder.cs">
       <DependentUpon>Books.tt</DependentUpon>
     </Compile>
@@ -359,10 +351,8 @@
     <Content Include="Views\Home\Details.cshtml" />
     <Content Include="Views\Book\Details.cshtml" />
     <Content Include="Views\Home\Buy.cshtml" />
-    <Content Include="Views\Library\Index.cshtml" />
-    <Content Include="Views\Book\MyBook.cshtml" />
     <Content Include="Views\Library\ViewBook.cshtml" />
-    <Content Include="Views\Library\myBook.cshtml" />
+    <Content Include="Views\Library\Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -374,7 +364,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\images\gallery\" />
     <Folder Include="Content\js\" />
-    <Folder Include="images\gallery\" />
+    <Folder Include="images\" />
     <Folder Include="js\" />
     <Folder Include="UploadedFiles\" />
     <Folder Include="UploadedImages\" />

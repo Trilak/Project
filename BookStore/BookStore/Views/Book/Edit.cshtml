@@ -17,7 +17,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Simple House Template</title>
+    
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet" />
     <link href="~/Content/css/templatemo-style.css" rel="stylesheet" />
 
@@ -36,7 +36,7 @@ https://templatemo.com/tm-539-simple-house
         <!-- Logo & Site Name -->
         <div class="placeholder">
 
-            <div class="parallax-window" data-parallax="scroll" data-image-src="Content/wallpaper1.jpg">
+            <div class="parallax-window" data-parallax="scroll" data-image-src="/Content/wallpaper1.jpg">
                 <div class="tm-header">
                     <div class="row tm-header-inner">
                         <div class="col-md-6 col-12">
@@ -50,7 +50,7 @@ https://templatemo.com/tm-539-simple-house
                             <ul class="tm-nav-ul">
                                 <li class="tm-nav-li">@Html.ActionLink("Home", "Index", "Home", null, new { @class = "tm-nav-link" })</li>
                                 <li class="tm-nav-li">@Html.ActionLink("Write", "Index", "Book", new { @class = "tm-nav-link" })</li>
-                                <li class="tm-nav-li">@Html.ActionLink("Library", "Index", "Library", null, new { @class = "tm-nav-link" })</li>
+                                <li class="tm-nav-li">@Html.ActionLink("Library", "ViewBook", "Library", null, new { @class = "tm-nav-link" })</li>
                             </ul>
                         </nav>
                     </div>

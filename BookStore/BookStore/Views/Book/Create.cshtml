@@ -48,7 +48,7 @@ https://templatemo.com/tm-539-simple-house
                             <ul class="tm-nav-ul">
                                 <li class="tm-nav-li">@Html.ActionLink("Home", "Index", "Home", null, new { @class = "tm-nav-link" })</li>
                                 <li class="tm-nav-li">@Html.ActionLink("Write", "Index", "Book", new { @class = "tm-nav-link" })</li>
-                                <li class="tm-nav-li">@Html.ActionLink("Library", "Index", "Library", null, new { @class = "tm-nav-link" })</li>
+                                <li class="tm-nav-li">@Html.ActionLink("Library", "ViewBook", "Library", null, new { @class = "tm-nav-link" })</li>
                             </ul>
                         </nav>
                     </div>
@@ -83,7 +83,7 @@ https://templatemo.com/tm-539-simple-house
                             <div class="form-group row">
                                 <div class="col-sm-10">
                                     <p>Title</p>
-                                    <input type="text" class="form-control" placeholder="Title" id="Title" name="Title" autocomplete="off">
+                                    <input type="text" class="form-control" placeholder="Title" id="Title" name="Title" required="" autocomplete="off">
                                 </div>
                             </div>
      
@@ -91,11 +91,14 @@ https://templatemo.com/tm-539-simple-house
 
                                 <div class="col-sm-10">
                                     <p>Category</p>
-                                    <select class="form-control" id="Category" name="Category" style="width: 186.6px;">
+                                    <select class="form-control" id="Category" required="" name="Category" style="width: 186.6px;">
                                         <option value="Art">Art</option>
                                         <option value="Business">Business</option>
                                         <option value="Cooking">Cooking</option>
+                                        <option value="Education">Education</option>
                                         <option value="Kids">Kids</option>
+                                        <option value="Technogy">Technogy</option>
+                                        
                                     </select>
                                     
                                 </div>
@@ -105,14 +108,14 @@ https://templatemo.com/tm-539-simple-house
 
                                 <div class="col-sm-10">
                                     <p>Description</p>
-                                    <input type="text" class="form-control" placeholder="Description" id="Description" name="Description" autocomplete="off">
+                                    <input type="text" class="form-control" placeholder="Description" id="Description" name="Description" required="" autocomplete="off">
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <div class="col-sm-10">
                                     <p>Price</p>
-                                    <input type="text" class="form-control" placeholder="Price" id="Price" name="Price" autocomplete="off">
+                                    <input type="text" class="form-control" placeholder="Price" id="Price" name="Price"  autocomplete="off">
                                 </div>
                             </div>
 
@@ -120,7 +123,7 @@ https://templatemo.com/tm-539-simple-house
 
                                 <div class="col-sm-10">
                                     <p>Cover Image</p>
-                                    <input type="file" class="form-control" placeholder="Coverimg" id="Coverimg" name="Coverimg">
+                                    <input type="file" class="form-control" placeholder="Coverimg" id="Coverimg" required="" name="Coverimg">
 
                                 </div>
                             </div>
@@ -129,7 +132,7 @@ https://templatemo.com/tm-539-simple-house
 
                                 <div class="col-sm-10">
                                     <p>E-Book</p>
-                                    <input type="file" class="form-control" placeholder="Content" id="Content" name="Content">
+                                    <input type="file" class="form-control" placeholder="Content" id="Content" required="" name="Content">
                                 </div>
                             </div>
 

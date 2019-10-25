@@ -49,17 +49,24 @@ namespace BookStore.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    tblOrder orderObj = new tblOrder();
+                    if (fc["Card_no"] != null)
+                    {
+                        tblOrder orderObj = new tblOrder();
 
-                    orderObj.User_id = Convert.ToInt32(Session["User_ID"]);
-                    orderObj.Book_id = Convert.ToInt32(fc["Book_id"]);
-                    orderObj.Price = Convert.ToDecimal(fc["Price"]);
-                    orderObj.Order_date = DateTime.Now;
-                    orderObj.Card_no = fc["Card_no"];
+                        orderObj.User_id = Convert.ToInt32(Session["User_ID"]);
+                        orderObj.Book_id = Convert.ToInt32(fc["Book_id"]);
+                        orderObj.Price = Convert.ToDecimal(fc["Price"]);
+                        orderObj.Order_date = DateTime.Now;
+                        orderObj.Card_no = fc["Card_no"];
+                        db.tblOrder.Add(orderObj);
+                        db.SaveChanges();
 
-
-                    db.tblOrder.Add(orderObj);
-                    db.SaveChanges();
+                    }
+                    else
+                    {
+                        return View();
+                    }
+                    
                 }
 
             }
@@ -73,14 +80,14 @@ namespace BookStore.Controllers
 
 
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public FileStreamResult GetPDF(FormCollection fc)
+     
+        public FileStreamResult GetPDF(string ParamName)
         {
 
-
-            var Content = fc["Content"];
-            var filePath = Path.Combine(Server.MapPath("~/UploadedFiles/"), Content);
+   
+            string a = Convert.ToString(ParamName);
+    
+            var filePath = Path.Combine(Server.MapPath("~/UploadedFiles/"), a);
             FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
 
 

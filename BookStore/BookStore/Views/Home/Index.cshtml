@@ -45,7 +45,7 @@ https://templatemo.com/tm-539-simple-house
                             <ul class="tm-nav-ul">
                                 <li class="tm-nav-li">@Html.ActionLink("Home", "Index", "Home", new { @class = "tm-nav-link" })</li>
                                 <li class="tm-nav-li">@Html.ActionLink("Write", "Index", "Book", null, new { @class = "tm-nav-link" })</li>
-                                <li class="tm-nav-li">@Html.ActionLink("Library", "Index", "Library", null, new { @class = "tm-nav-link" })</li>
+                                <li class="tm-nav-li">@Html.ActionLink("Library", "ViewBook", "Library", null, new { @class = "tm-nav-link" })</li>
                             </ul>
                         </nav>
                     </div>
@@ -62,31 +62,17 @@ https://templatemo.com/tm-539-simple-house
             <div class="tm-paging-links">
                 <nav>
                     <ul>
-                        <li class="tm-paging-item"><a href="#" class="tm-paging-link active">Category</a></li>
                         <li class="tm-paging-item"><a href="#" class="tm-paging-link">NewUpdate</a></li>
-                        <li class="tm-paging-item"><a href="#" class="tm-paging-link">E-BOOK</a></li>
+                        <li class="tm-paging-item"><a href="#" class="tm-paging-link">Title</a></li>
+                        <li class="tm-paging-item"><a href="#" class="tm-paging-link active">Category</a></li>
+                        
                     </ul>
                 </nav>
             </div>
             <!-- Gallery -->
             <div class="row tm-gallery">
                 <!-- gallery page 1 -->
-                <div id="tm-gallery-page-category" class="tm-gallery-page">
-                    @foreach (var item in Model.OrderBy(i => i.Category))
-                    {
-                        <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-                            <figure>
-                                <img src=@Url.Content("~/UploadedImages/" + @Html.DisplayFor(modelItem => item.Coverimg)) width="250" height="300"/><br /><br />
-                                <figcaption>
-                                    <h4 class="tm-gallery-title">@Html.DisplayFor(modelItem => item.Title)</h4>
-                                    <p class="tm-gallery-description">@Html.DisplayFor(modelItem => item.Category)</p>
-                                    <p class="tm-gallery-price">@Html.DisplayFor(modelItem => item.Price) || @Html.ActionLink("Details", "Details", new { id = item.Book_id }) || @Html.ActionLink("Buy", "Buy", new { id = item.Book_id })</p>
-
-                                </figcaption>
-                            </figure>
-                        </article>
-                    }
-                </div> 
+                
 
                 <div id="tm-gallery-page-newupdate" class="tm-gallery-page">
                     @foreach (var item in Model)
@@ -96,20 +82,54 @@ https://templatemo.com/tm-539-simple-house
                                 <img src=@Url.Content("~/UploadedImages/" + @Html.DisplayFor(modelItem => item.Coverimg)) width="250" height="300" /><br /><br />
                                 <figcaption>
                                     <h4 class="tm-gallery-title">@Html.DisplayFor(modelItem => item.Title)</h4>
-                                    @using (Html.BeginForm("GetPDF", "Home", FormMethod.Post))
-                                    {
-                                        @Html.AntiForgeryToken()
-                                        @Html.HiddenFor(modelItem => item.Content, new { @id = "Content", @name = "Content" })
-                                        <button class="btn">Read</button>
-                                    }
+
+                                 
+                 
                                     <p class="tm-gallery-description">@Html.DisplayFor(modelItem => item.Category)</p>
-                                    <p class="tm-gallery-price">@Html.DisplayFor(modelItem => item.Price) || @Html.ActionLink("Details", "Details", new { id = item.Book_id }) || @Html.ActionLink("Buy", "Buy", new { id = item.Book_id })</p>
+                                    <p class="tm-gallery-price">@Html.DisplayFor(modelItem => item.Price) || @Html.ActionLink("Buy", "Buy", new { id = item.Book_id })</p>
                                 </figcaption>
                             </figure>
                         </article>
                     }
                 </div> 
-                <!-- gallery page 1 -->
+
+                <div id="tm-gallery-page-title" class="tm-gallery-page">
+                    @foreach (var item in Model.OrderBy(i => i.Title))
+                    {
+                        <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+                            <figure>
+                                <img src=@Url.Content("~/UploadedImages/" + @Html.DisplayFor(modelItem => item.Coverimg)) width="250" height="300" /><br /><br />
+                                <figcaption>
+                                    <h4 class="tm-gallery-title">@Html.DisplayFor(modelItem => item.Title)</h4>
+
+
+
+                                    <p class="tm-gallery-description">@Html.DisplayFor(modelItem => item.Category)</p>
+                                    <p class="tm-gallery-price">@Html.DisplayFor(modelItem => item.Price) || @Html.ActionLink("Buy", "Buy", new { id = item.Book_id })</p>
+                                </figcaption>
+                            </figure>
+                        </article>
+                    }
+                </div> 
+
+                <div id="tm-gallery-page-category" class="tm-gallery-page">
+                    @foreach (var item in Model.OrderBy(i => i.Category))
+                    {
+                        <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+                            <figure>
+                                <img src=@Url.Content("~/UploadedImages/" + @Html.DisplayFor(modelItem => item.Coverimg)) width="250" height="300" /><br /><br />
+                                <figcaption>
+
+                                    <h4 class="tm-gallery-title">@Html.DisplayFor(modelItem => item.Title)</h4>
+                                    <p class="tm-gallery-description">@Html.DisplayFor(modelItem => item.Category)</p>
+                                    <p class="tm-gallery-price">@Html.DisplayFor(modelItem => item.Price) || @Html.ActionLink("Buy", "Buy", new { id = item.Book_id })</p>
+
+                                </figcaption>
+                            </figure>
+                        </article>
+                    }
+                </div> 
+               
             </div>
 
         </main>

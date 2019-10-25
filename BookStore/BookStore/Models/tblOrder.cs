@@ -19,6 +19,7 @@ namespace BookStore.Models
         public Nullable<int> Book_id { get; set; }
         public Nullable<decimal> Price { get; set; }
         public Nullable<System.DateTime> Order_date { get; set; }
+        
         public string Card_no { get; set; }
     
         public virtual Books Books { get; set; }
